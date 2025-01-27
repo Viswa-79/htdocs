@@ -64,21 +64,23 @@
                 </div>
                 
                 <ul class="ps-0 my-4 pt-2 circle-bullets">
-                <!--<a href="product_brand.php"><li class="mb-0 d-flex align-items-center">
+                <a href="product_brand.php"><li class="mb-0 d-flex align-items-center">
                     <i class="ti ti-point ti-lg"></i>Brand Master</li></a>
 				<a href="product_print.php"><li class="mb-0 d-flex align-items-center">
-                    <i class="ti ti-point ti-lg"></i>Print Master</li></a>-->
-				<a href="shift.php"><li class="mb-0 d-flex align-items-center">
-                    <i class="ti ti-point ti-lg"></i>Shift Master</li></a>
-				<a href="shift_group.php"><li class="mb-0 d-flex align-items-center">
-                    <i class="ti ti-point ti-lg"></i>Shift Group Master</li></a>
-				<a href="desig_master.php"><li class="mb-0 d-flex align-items-center">
-                    <i class="ti ti-point ti-lg"></i>Designation Master</li></a>
-				
-			   
+                    <i class="ti ti-point ti-lg"></i>Print Master</li></a>
+				<a href="product_gsm.php"><li class="mb-0 d-flex align-items-center">
+                    <i class="ti ti-point ti-lg"></i>GSM Master</li></a>
+			    <a href="size.php"><li class="mb-0 d-flex align-items-center">
+                    <i class="ti ti-point ti-lg"></i>Size Master</li></a>
+			    <a href="size_grp.php"><li class="mb-0 d-flex align-items-center">
+                    <i class="ti ti-point ti-lg"></i>Size Group Master</li></a>
+
+                   
+
+                  
 
                 </ul>
-				<a href="emp_master.php" class="btn btn-label-success d-grid w-100">EMPLOYEE MASTER</a>
+				<a href="product_process.php" class="btn btn-label-success d-grid w-100">PROCESS MASTER</a>
                
               </div>
             </div>
@@ -101,15 +103,12 @@
 					
 					<a href="currency.php"><li class="mb-0 d-flex align-items-center">
                     <i class="ti ti-point ti-lg"></i>Currency Master</li></a>
-					
+					<a href="staff_master.php"><li class="mb-0 d-flex align-items-center">
+                    <i class="ti ti-point ti-lg"></i>Staff Master</li></a>
 					<a href="product_master.php"><li class="mb-0 d-flex align-items-center">
                     <i class="ti ti-point ti-lg"></i>Product Master</li></a>
-					<!--<a href="product_fabric.php"><li class="mb-0 d-flex align-items-center">
-                    <i class="ti ti-point ti-lg"></i>Fabric Master</li></a>
-					<a href="size.php"><li class="mb-0 d-flex align-items-center">
-                    <i class="ti ti-point ti-lg"></i>Size Master</li></a>-->
-                    <a href="cutpanel_master.php"><li class="mb-0 d-flex align-items-center">
-                    <i class="ti ti-point ti-lg"></i>Cutpanel Master</li></a>
+					<a href="product_dia.php"><li class="mb-0 d-flex align-items-center">
+                    <i class="ti ti-point ti-lg"></i>Dia Master</li></a>
                                         
                 </ul>
 
@@ -132,23 +131,17 @@
                 
                 <ul class="ps-0 my-4 pt-2 circle-bullets">
 					
-				
-				<a href="location_master.php"><li class="mb-0 d-flex align-items-center">
-                    <i class="ti ti-point ti-lg"></i>Location Master</li></a>
-                
-				<a href="product_designation.php"><li class="mb-0 d-flex align-items-center">
-                    <i class="ti ti-point ti-lg"></i>Designation Master</li></a>
-				<a href="staff_master.php"><li class="mb-0 d-flex align-items-center">
-                    <i class="ti ti-point ti-lg"></i>Staff Master</li></a>
-					
-			    <!--<a href="product_category.php"><li class="mb-0 d-flex align-items-center">
+				<a href="product_category.php"><li class="mb-0 d-flex align-items-center">
                     <i class="ti ti-point ti-lg"></i>Category Master</li></a>
+
+                <a href="product_color.php"><li class="mb-0 d-flex align-items-center">
+                    <i class="ti ti-point ti-lg"></i>Color Master</li></a>
 
                 <a href="product_fabric.php"><li class="mb-0 d-flex align-items-center">
                     <i class="ti ti-point ti-lg"></i>Fabric Master</li></a>
 					
 				<a href="product_season.php"><li class="mb-0 d-flex align-items-center">
-                    <i class="ti ti-point ti-lg"></i>Season Master</li></a>-->
+                    <i class="ti ti-point ti-lg"></i>Season Master</li></a>
 
                     
                    

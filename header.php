@@ -10,11 +10,9 @@
             <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
               <!-- Search -->
 
-              <!-- <div class="btn rounded btn-outline-secondary p-2 me-2 rounded">
-               <img src="../assets/img/avatars/CREDENCE.png" alt class="h-auto rounded-circle" style="width:25px;height:40px;" /> 
-                        </div> -->
+              
          
-                    <span ><img src="../assets/img/avatars/CREDENCE.png" style="width:170px;height:50px;"  /> </span>
+                    <span >SRI BALAJI TEXTURES... </span>
                  
               <!-- /Search -->
 
@@ -118,7 +116,6 @@
                           <a  class="stretched-link">Setting</a>
                           <small class="text-muted mb-0">Account Settings</small>
                         </div>
-                        
                       </div>
                       <div class="row row-bordered overflow-visible g-0">
                         <div class="dropdown-shortcuts-item col">
@@ -146,9 +143,9 @@
                 <!-- User -->
                 <li class="nav-item navbar-dropdown dropdown-user dropdown">
                   <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-                    <div class="avatar avatar">
-                      <img src="../assets/img/avatars/Logo1.png" />
-                    </div> 
+                    <div class="avatar avatar-online">
+                      <img src="../assets/img/avatars/5.png" alt class="h-auto rounded-circle" />
+                    </div>
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">
                     <li>
@@ -156,12 +153,12 @@
                         <div class="d-flex">
                           <div class="flex-shrink-0 me-3">
                             <div class="avatar avatar-online">
-                              <img style="border-radius:50px" src="uploads/<?php echo $imageupload;?>" />
+                              <img src="../assets/img/avatars/5.png" alt class="h-auto rounded-circle" />
                             </div>
                           </div>
                           <div class="flex-grow-1">
-                            <span class="fw-medium d-block" style="font-size:17px;text-transform:capitalize"><?php echo $user_name;?></span>
-                            <small class="text-muted"><?php echo $role;?></small>
+                            <span class="fw-medium d-block">John Doe</span>
+                            <small class="text-muted">Admin</small>
                           </div>
                         </div>
                       </a>
@@ -170,7 +167,7 @@
                       <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                      <a class="dropdown-item" id="edit<?php echo $sno;?>" href="myprofile.php?cid=<?php echo base64_encode($rz1['id']);?>" >
+                      <a class="dropdown-item" >
                         <i class="ti ti-user-check me-2 ti-sm"></i>
                         <span class="align-middle">My Profile</span>
                       </a>
@@ -181,15 +178,32 @@
                         <span class="align-middle">Settings</span>
                       </a>
                     </li>
-                    <?php if($empid=='ADM01'){?>
                     <li>
-                      <a class="dropdown-item" href="changepw.php">
-                        <i class="ti ti-password me-2 ti-sm"></i>
-                        <span class="align-middle">Change Password</span>
+                      <a class="dropdown-item">
+                        <span class="d-flex align-items-center align-middle">
+                          <i class="flex-shrink-0 ti ti-credit-card me-2 ti-sm"></i>
+                          <span class="flex-grow-1 align-middle">Billing</span>
+                          <span class="flex-shrink-0 badge badge-center rounded-pill bg-label-danger w-px-20 h-px-20"
+                            >2</span
+                          >
+                        </span>
                       </a>
                     </li>
-               <?php } ?>
-                  
+                    <li>
+                      <div class="dropdown-divider"></div>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" >
+                        <i class="ti ti-help me-2 ti-sm"></i>
+                        <span class="align-middle">FAQ</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" >
+                        <i class="ti ti-currency-dollar me-2 ti-sm"></i>
+                        <span class="align-middle">Pricing</span>
+                      </a>
+                    </li>
                     <li>
                       <div class="dropdown-divider"></div>
                     </li>

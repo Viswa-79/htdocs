@@ -1,5 +1,11 @@
 <?php include "config.php"; ?>
-
+<html
+  lang="en"
+  class="light-style layout-navbar-fixed layout-menu-fixed layout-compact"
+  dir="ltr"
+  data-theme="theme-default"
+  data-assets-path="../assets/"
+  data-template="vertical-menu-template">
   <?php include "head.php";?>
 
   <body>
@@ -25,59 +31,46 @@
             <div class="container-xxl flex-grow-1 container-p-y">
               
               <!-- Users List Table -->
-
-
-              <div class="card-header d-flex align-items-center justify-content-between">
-                      <button class="btn btn-primary">PARTY&nbsp;LIST</button><br>
+              <div class="card">
+               <div 
+                      class="card-header sticky-element bg-label-success d-flex justify-content-sm-between align-items-sm-center flex-column flex-sm-row">
+                      <h5 class="card-title mb-sm-0 me-2" >PARTY LIST</h5>
+                      <div class="action-btns">
                       
-
-                      <div class="card-header sticky-element  d-flex justify-content-sm-between align-items-sm-center flex-column flex-sm-row">
-                      <h5 class="card-title mb-sm-0 me-2" ></h5>
-                     <div >
-                            <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-                              <a  tabindex="0" onclick="addParty();" aria-controls="DataTables_Table_0"
+                      
+                      <button
+                        type="button"
+                        class="btn btn-icon btn-warning"
+                        data-bs-toggle="tooltip"
+                        data-bs-placement="top"
+                        title="Print">
+                        <span class="ti ti-printer"></span>
+                      </button>
+                    
+                      &nbsp;  <button type="button" 
+                class="btn btn-icon btn-secondary"
+                data-bs-toggle="tooltip"
+                        data-bs-placement="top"
+                        title="PDF">
+                  <span class="ti ti-file"></span>
+                   </button>
+               &nbsp;   <button class="btn btn-secondary add-new btn-primary" tabindex="0" onclick="addParty();" aria-controls="DataTables_Table_0"
                  type="button" data-bs-toggle="modal"
-                          data-bs-target="#largeModal" class="btn btn-primary" style="color: white;"> <i class="ti ti-plus me-0 me-sm-1 ti-xs"></i> Add New
-                             
-</a>
-                              
-                              
-                              <div class="btn-group" role="group">
-                                <button
-                                  id="btnGroupDrop1"
-                                  type="button"
-                                  class="btn btn-label-secondary dropdown-toggle"
-                                  data-bs-toggle="dropdown"
-                                  aria-haspopup="true"
-                                  aria-expanded="false">
-                                  Tools
-                                </button>
-                               
-                                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                           
-                                  <a class="dropdown-item" href="javascript:void(0);">  <span class="ti ti-file"></span> Report</a>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+                          data-bs-target="#largeModal"><span>
+                  <i class="ti ti-plus me-0 me-sm-1 ti-xs"></i>
+                <span class="d-none d-sm-inline-block">Add New Party</span></span></button>
+                      </div>
                     </div>
-                    </div>
-              <div class="card mt-4">
-              
-
-                    <div class="card-body">
-                  <div class="card-datatable table-responsive">
-                <table id="myTable" class="table table-hover display">
+                <table class="table table-hover">
                     <thead>
                       <tr>
                       <th><div align="center">S.No</div></th>   
                       <th><div align="center" hidden>ID<div></th>                    
                       <th>Party Name</th>
                         <th>Group</th>
-                        <th>Mobile&nbsp;No.</th>
-                        <th>Country</th>
-                        <th style="padding-left:80px">Group</th>
-                        <th style="padding-left:80px">Action</th>
+                        <th>Process</th>
+                        <th>Status</th>
+                        <th style="padding-left:80px">Action</td>
                        </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
@@ -86,76 +79,28 @@
                   
                                       <?php
                                       $sno=1;
-            
-                  $sql = " SELECT * FROM partymaster order by name asc";
-					        $result =mysqli_query($conn, $sql);
+                      // LOOP TILL END OF DATA
+                      $sql = " SELECT *,p.id as id FROM partymaster p left join process pr on p.process=pr.id order by name asc";
+                  $result =mysqli_query($conn, $sql);
                   $count=mysqli_num_rows($result);
                   if($count>0)
                   {
                    while($rows=mysqli_fetch_array($result))
- 
+
                   {
                     
                   ?>
                   <tr>
-                      
+                      <!-- FETCHING DATA FROM EACH
+                          ROW OF EVERY COLUMN -->
                       <td align="center"><?php echo $sno;?></td>
                       <td><input type"text" name="id" hidden id ="id<?php echo $sno;?>" value="<?php echo $rows['id'];?>"></td>
-                      <td nowrap style="text-transform:uppercase"><?php echo $rows['name'];?></td>
+                      <td><?php echo $rows['name'];?></td>
                       <td><?php echo $rows['party_group'];?></td>
-                      <td><?php echo $rows['mobileno'];?></td>
-                      <td><?php echo $rows['country'];?></td>
+                      <td><?php echo $rows['process'];?></td>
                       
-                                        
-                        <td nowrap>
-                                          <!-- <a class="btn btn-outline-info" href="assign.php?cid=<?php echo base64_encode($rows['id']);?>" 
-                id="add<?php echo $sno;?>" >
-                    <span class="ti-xs ti ti-plus me-1"></span>Add 
-                  </a> -->
-                  <?php
-                  if($rows['party_group']=='Sales')
-                  {
-                    ?>
-                                          <a  class="btn btn-outline-info" href="assign.php?cid=<?php echo base64_encode($rows['id']);?>" 
-                id="add<?php echo $sno;?>" >
-                    <span class="ti-xs ti ti-eye me-1"></span>Add 
-                  </a>
-                  <?php
-                  }
-                  else
-                  {
-                    ?>
-                 <button class="btn btn-outline-info" disabled href="assign.php?cid=<?php echo base64_encode($rows['id']);?>"
-                id="add<?php echo $sno;?>" >
-                    <span class="ti-xs ti ti-eye me-1"></span>Add 
-                  </button>
-                  <?php
-                  }
-                  ?>
-                 
-                  <?php
-                  if($rows['party_group']=='Sales')
-                  {
-                    ?>
-                                          <a  class="btn btn-outline-warning"  href="assign_list.php?cid=<?php echo base64_encode($rows['id']);?>"
-                id="view<?php echo $sno;?>" >
-                    <span class="ti-xs ti ti-eye me-1"></span>View 
-                  </a>
-                  <?php
-                  }
-                  else
-                  {
-                    ?>
-                 <button class="btn btn-outline-warning" disabled href="assign_list.php?cid=<?php echo base64_encode($rows['id']);?>"
-                id="view<?php echo $sno;?>" >
-                    <span class="ti-xs ti ti-eye me-1"></span>View 
-                  </button>
-                  <?php
-                  }
-                  ?>
-                  </td>
-
-                  <td nowrap>
+                      <td><span class="badge bg-label-primary me-1">Active</span></td>
+                                          <td>
                                           <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#largeModal"
                 id="edit<?php echo $sno;?>" onclick="getParty(edit<?php echo $sno;?>.id);">
                     <span class="ti-xs ti ti-edit me-1"></span>Edit
@@ -167,8 +112,6 @@
                     <span class="ti-xs ti ti-trash me-1"></span>Delete
                   </button> 
                                           </td>
-                                      
-
                       </tr>
                       <?php
                   $sno++;
@@ -183,8 +126,6 @@
                                     </table>
                  
                 </div>
-                </div>
-                </div>
                 <!-- Offcanvas to add new user -->
                
               </div>
@@ -194,7 +135,7 @@
             <div class="modal fade" id="largeModal" tabindex="-1" aria-hidden="true">
                         <div class="modal-dialog modal-lg" role="document">
                           <div class="modal-content">
-                          <form action="" method="post" autocomplete="off">
+                          <form action="" method="post">
                             <div class="modal-header">
                               <h5 class="modal-title" id="exampleModalLabel3"><span id="form-title">Add</span> Party Details</h5>
                               
@@ -209,7 +150,7 @@
                                 <label class="form-label" hidden for="formtabs-country">ID</label>
                                 <input
                           type="text"
-                          class="form-select"
+                          class="form-control"
                           id="id"
                           hidden
                           placeholder=""
@@ -217,20 +158,33 @@
                           aria-label="John Doe" />
                                 </div>
                               <div class="row g-4">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                   
                                   <label class="form-label" for="form-repeater-1-4">Group&nbsp;<span style="color:red;">*</span></label>
-                            <select id="party_group" class="select form-select" name="party_group" data-allow-clear="true" required>
+                            <select id="party_group" class="select form-control" name="party_group" data-allow-clear="true" required>
                                 <option value="">Select</option>
                                 <option value="Sales">Sales</option>
                                 <option value="Purchase">Purchase</option>
-                                
+                                <option value="Job Work">Job Work</option>
                                 
                               </select>
                                 </div>
                                 
-                                
-                                <div class="col-md-4">
+                                <div class="col-md-3">
+                                <label class="form-label"  for="formtabs-country">Process</label>
+                              <select id="process" class="select form-control" name="process" data-allow-clear="true">
+                                <option value="">Select</option>
+                                <?php 
+					$sql = "SELECT * FROM process order by id asc";
+                    $result = mysqli_query($conn, $sql);
+                    while($rw = mysqli_fetch_array($result))
+					{ ?>
+                         <option value="<?php echo $rw['id'];?>"><?php echo $rw['process'];?>
+						 </option>
+					<?php } ?>
+                              </select>
+                                </div>
+                                <div class="col-md-6">
                                 <label class="form-label" for="formtabs-country">Party Name&nbsp;<span style="color:red;">*</span></label>
                               <input
                               type="text"
@@ -240,16 +194,14 @@
                               name="name"
                               aria-label="Product barcode" required/>
                                 </div>
-
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                   
                                 <label class="form-label" for="formtabs-country">Contact Person Name&nbsp;<span style="color:red;">*</span></label>
                       <div class="input-group">
                         
                         <span style="width: 60px;"  class="input-group-text"><select style="border: none;padding: 0px;"  id="title" class="form-control" name="title" data-allow-clear="true">
-                          <option value="">Title</option>
-                          <option value="Mr.">Mr.</option>
-                          <option value="Ms.">Ms.</option>
+                          <option value="">..</option>
+                          <option value="Mr">Mr</option>
                           <option value="Mrs">Mrs</option>
                          
                         </select></span>
@@ -264,42 +216,58 @@
                                 </div>
                             
                                 
-                                <div class="col-md-4">
-                                <label class="form-label"  for="formtabs-country">Mobile No&nbsp;</label>
+                                <div class="col-md-3">
+                                <label class="form-label"  for="formtabs-country">Mobile No&nbsp;<span style="color:red;">*</span></label>
                                 <input
-                              type="number"
+                              type="text"
                               class="form-control"
                               id="mobileno"
-                              placeholder="+91 6398X XXXXX"
-                              name="mobileno" />
+                              placeholder="+91 65*** ***55"
+                              name="mobileno"
+                              aria-label="Product barcode" required/>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                 <label class="form-label" for="formtabs-country">Telephone No</label>
                                 <input
-                              type="number"
+                              type="text"
                               class="form-control"
                               id="telephone"
-                              placeholder="+91 9874X XXXXX"
-                              name="telephone" />
+                              placeholder="+91 65*** ***55"
+                              name="telephone"
+                              aria-label="Product barcode" />
                                 </div>
                              
-							  
-                               <div class="col-md-4">
+							   </div>
+                              
+                              <div class="row g-3 mt-1">
+                                <div class="col-md-3">
                                   
                                   <label class="form-label" for="form-repeater-1-4">Email</label>
                                   <input class="form-control" type="email" name="email" id="email" />
-                                </div> </div>
-                              <div class="row g-3 mt-1">
-                               
-                                <div class="col-md-4">
+                                </div>
+                                <div class="col-md-3">
                                 <label class="form-label" for="formtabs-country">GST No</label>
                                 <input
                               type="text"
                               class="form-control"
                               id="gstno"
-                              name="gstno" />
+                              name="gstno"
+                              aria-label="Product barcode" />
                                 </div>
-								  <div class="col-md-4">
+								  <div class="col-md-6">
+                                  <label for="emailLarge" class="form-label">Address&nbsp;<span style="color:red;">*</span></label>
+                                  <input type="text" id="address" name="address" class="form-control" required>
+                                   </input>
+								   </div>
+                                </div>
+                              
+                                <div class="row g-3 mt-1">
+								
+								        
+                          
+                              
+                             
+                                <div class="col-md-3">
                                   
                                   <label class="form-label" for="form-repeater-1-4">City</label>
                                   <input
@@ -307,36 +275,34 @@
                               class="form-control"
                               id="city"
                               placeholder="Enter City"
-                              name="city" />
+                              name="city"
+                              aria-label="Product barcode" />
                                 
                               </select>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                 <label class="form-label"  for="formtabs-country">Pincode</label>
                                 <input
                               type="text"
                               class="form-control"
                               id="pincode"
-                              name="pincode" />
+                              name="pincode"
+                              aria-label="Product barcode" />
                                 </div>
-                                </div>
-                              
-                                <div class="row g-3 mt-1">
 								
-                               
-								
-								      <div class="col-md-4">
-                                <label class="form-label" for="formtabs-country">State&nbsp;</label>
+								      <div class="col-md-3">
+                                <label class="form-label" for="formtabs-country">State&nbsp;<span style="color:red;">*</span></label>
                                 <input
                               type="text"
                               class="form-control"
                               id="state"
                               placeholder="Enter State"
-                              name="state" />
+                              name="state"
+                              aria-label="Product barcode" />
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                 <label class="form-label"  for="formtabs-country1">Country&nbsp;<span style="color:red;">*</span></label>
-                                <select class="select form-select" name="country" id="country" data-allow-clear="true" required>
+                                <select class="select form-control" name="country" id="country"  required>
     <option value="">Select Country</option>
     <option value="Afghanistan">Afghanistan</option>
     <option value="Albania">Albania</option>
@@ -579,20 +545,92 @@
     <option value="Zimbabwe">Zimbabwe</option>
 </select>
                                 </div>
-                              
+                               
                         
-                                  <div class="col-md-4">
-                                  <label for="emailLarge" class="form-label invisible">Merchandiser&nbsp;</label>
-                                  <input type="text" id="merchant" name="merchant" class="form-control invisible" >
-                                   </input>
-								   </div>
-                                  <div class="col-md-12">
-                                  <label for="emailLarge" class="form-label">Address&nbsp;<span style="color:red;">*</span></label>
-                                  <input type="text" id="address" name="address" class="form-control" required>
-                                   </input>
-								   </div>
+                                
                               </div>
-                 
+                              
+                              <div class="divider my-4">
+                <div class="divider-text">Shipment Details</div>
+              </div>
+
+              <div class="row g-4 ">
+                                <div class="col-md-3">
+                                  
+                                  <label class="form-label" for="form-repeater-1-4">Port Of Destination&nbsp;<span style="color:red;">*</span></label>
+                                  <input
+                              type="text"
+                              id="Destination"
+                              name="Destination"
+                              class="form-control" />
+                                </div>
+                                
+                                <div class="col-md-3">
+                                <label class="form-label"  for="formtabs-country">Payment&nbsp;<span style="color:red;">*</span></label>
+                                <input
+                              type="text"
+                              id="payment"
+                              name="payment"
+                              class="form-control" />
+                                </div>
+                                <div class="col-md-3">
+                                <label class="form-label" for="formtabs-country">Tolerance&nbsp;(%)&nbsp;<span style="color:red;">*</span></label>
+                                <input
+                              type="number"
+							                 step="0.1"
+                              id="tolerance"
+                              name="tolerance"
+                              class="form-control phone-mask"
+                              aria-label="658 799 8941" />
+                                </div>
+                                <div class="col-md-3">
+                                  
+                                <label class="form-label"  for="formtabs-country1">Currency&nbsp;<span style="color:red;">*</span></label>
+                                <select class="select form-control" name="currency" id="currency"  required>
+                                <option value="">Select</option>
+                                <?php 
+					$sql = "SELECT * FROM currency order by id asc";
+                    $result = mysqli_query($conn, $sql);
+                    while($rw = mysqli_fetch_array($result))
+					{ ?>
+                         <option value="<?php echo $rw['id'];?>"><?php echo $rw['currency'];?>
+						 </option>
+					<?php } ?>
+                              </select>
+                                </div>
+                              </div>
+              <div class="row g-4 mt-1">
+                                <div class="col-md-3">
+                                  
+                                  <label class="form-label" for="form-repeater-1-4">Shipment Terms</label>
+                                  <input
+                              type="text"
+                              id="shipterm"
+                              name="shipterm"
+                              class="form-control phone-mask"
+                              aria-label="658 799 8941" />
+                                </div>
+                                
+                                <div class="col-md-3">
+                                <label class="form-label"  for="formtabs-country">Shipment Port</label>
+                                <input
+                              type="text"
+                              id="shipport"
+                              name="shipport"
+                              class="form-control phone-mask"
+                              aria-label="658 799 8941" />
+                                </div>
+                                <div class="col-md-6">
+                                <label class="form-label" for="formtabs-country">Agent Name&nbsp;<span style="color:red;">*</span></label>
+                                <input
+                              type="text"
+                              id="agent"
+                              name="agent"
+                              class="form-control phone-mask"
+                              aria-label="658 799 8941" />
+                                </div>
+                               
+                              </div>
 
                             </div>
                             <div class="modal-footer">
@@ -633,13 +671,15 @@
 
   
   </body>
+</html>
 
 <?php
 if(isset($_POST['submit']))
 {
   $id=$_POST['id']; 
 $party_group=$_POST['party_group'];
-$name=strtoupper($_POST['name']);
+$process=$_POST['process'];
+$name=$_POST['name'];
 $title=$_POST['title'];
 $cpname=$_POST['cpname'];
 $mobileno=$_POST['mobileno'];
@@ -651,16 +691,20 @@ $state=$_POST['state'];
 $city=$_POST['city'];
 $pincode=$_POST['pincode'];
 $gstno=$_POST['gstno'];
-$merchant=$_POST['merchant'];
-
-
+$Destination=$_POST['Destination'];
+$payment=$_POST['payment'];
+$tolerance=$_POST['tolerance'];
+$currency=$_POST['currency'];
+$shipterm=$_POST['shipterm'];
+$shipport=$_POST['shipport'];
+$agent=$_POST['agent'];
 
 if($id==""){
-  $sql="insert into partymaster (party_group,name,title,cpname,mobileno,telephone,email,address,country,state,city,pincode,gstno,merchant) 
- values('$party_group','$name','$title','$cpname','$mobileno','$telephone','$email','$address','$country','$state','$city','$pincode','$gstno','$merchant')"; 
+  $sql="insert into partymaster (party_group,process,name,title,cpname,mobileno,telephone,email,address,country,state,city,pincode,gstno,payment,tolerance,currency,shipterm,shipport,agent) 
+ values('$party_group','$process','$name','$title','$cpname','$mobileno','$telephone','$email','$address','$country','$state','$city','$pincode','$gstno','$payment','$tolerance','$currency','$shipterm','$shipport','$agent')"; 
 $result1=mysqli_query($conn, $sql);
 }else{
-  $sql="UPDATE partymaster SET party_group='$party_group',name='$name',title='$title',cpname='$cpname',mobileno='$mobileno',telephone='$telephone',email='$email',address='$address',country='$country',state='$state',city='$city',pincode='$pincode',gstno='$gstno',merchant='$merchant' WHERE id='$id'"; 
+  $sql="UPDATE partymaster SET party_group='$party_group',process='$process',name='$name',title='$title',cpname='$cpname',mobileno='$mobileno',telephone='$telephone',email='$email',address='$address',country='$country',state='$state',city='$city',pincode='$pincode',gstno='$gstno',Destination='$Destination',payment='$payment',tolerance='$tolerance',currency='$currency',shipterm='$shipterm',shipport='$shipport',agent='$agent' WHERE id='$id'"; 
   $result2=mysqli_query($conn, $sql);
 }
 if($result1) { 
@@ -696,9 +740,10 @@ const data = JSON.parse(r);
 if(data.sts == 'ok'){
   
                     $('#id').val(data.id);                 
-                    $('#party_group').val(data.party_group);            
+                    $('#party_group').val(data.party_group);                 
+                    $('#process').val(data.process);                 
                     $('#name').val(data.name);
-					          $('#title').val(data.title);  					
+					$('#title').val(data.title);  					
                     $('#cpname').val(data.cpname);                 
                     $('#mobileno').val(data.mobileno);                 
                     $('#telephone').val(data.telephone);                 
@@ -709,8 +754,13 @@ if(data.sts == 'ok'){
                     $('#city').val(data.city);                 
                     $('#pincode').val(data.pincode);                 
                     $('#gstno').val(data.gstno);  
-                    $('#merchant').val(data.merchant);  
-                  
+                    $('#Destination').val(data.Destination);  
+                    $('#payment').val(data.payment);  
+                    $('#tolerance').val(data.tolerance);  
+                    $('#currency').val(data.currency);  
+                    $('#shipterm').val(data.shipterm);  
+                    $('#shipport').val(data.shipport);  
+                    $('#agent').val(data.agent);  
 }
 
       }
@@ -726,6 +776,7 @@ function addParty() {
   document.getElementById('form-title').innerHTML='Add';
                     $('#id').val('');                 
                     $('#party_group').val('');                 
+                    $('#process').val('');                 
                     $('#name').val('');                 
                     $('#cpname').val('');                 
                     $('#mobileno').val('');                 
@@ -737,8 +788,13 @@ function addParty() {
                     $('#city').val('');                 
                     $('#pincode').val('');                 
                     $('#gstno').val('');  
-                    $('#merchant').val('');  
-                    
+                    $('#Destination').val('');  
+                    $('#payment').val('');  
+                    $('#tolerance').val('');  
+                    $('#currency').val('');  
+                    $('#shipterm').val('');  
+                    $('#shipport').val('');  
+                    $('#agent').val('');  
 }
 </script>
 
